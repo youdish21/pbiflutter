@@ -7,6 +7,7 @@ import 'package:pbiflutter/auth.dart';
 import 'package:pbiflutter/welcome_screen.dart';
 import 'package:email_auth/email_auth.dart';
 import 'route.dart'as route;
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUp extends StatefulWidget {
 
@@ -192,6 +193,15 @@ class _SignUpState extends State<SignUp> {
 
     }else{
       print("Error could not send OTP.");
+      Fluttertoast.showToast(
+          msg: "Invalid OTP",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
     }
   }
 
@@ -215,12 +225,30 @@ class _SignUpState extends State<SignUp> {
         password: _passwordFieldController.text,
       );
 
-      if(user != null){
-
+      if(user == null){
+        Fluttertoast.showToast(
+            msg: "Registration Successful",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
 
         Navigator.pushNamed(context, route.homePage);
 
 
+      }else{
+        Fluttertoast.showToast(
+            msg: "This User Already Exist!",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
       }
 
 
