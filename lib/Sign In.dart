@@ -5,6 +5,7 @@ import 'package:pbiflutter/analytics.dart';
 import 'package:pbiflutter/auth.dart';
 import 'package:pbiflutter/welcome_screen.dart';
 import 'route.dart'as route;
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignIn extends StatefulWidget {
 
@@ -170,6 +171,15 @@ class _SignInState extends State<SignIn> {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
       if(user != null){
+        Fluttertoast.showToast(
+            msg: "Login Successful",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
         _analyticsService.logLogin();
         _analyticsService.setUserProperties(
           userId: user.uid,
@@ -177,6 +187,16 @@ class _SignInState extends State<SignIn> {
         );
         Navigator.pushNamed(context,route.homePage);
 
+      }else {
+        Fluttertoast.showToast(
+            msg: "Incorrect Please Try Again",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
       }
 
 
